@@ -14,7 +14,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 
 def carregar_tratar_dados(nome_aba):
 
-    df = conn.read(spreadsheet="planilhamika", worksheet=nome_aba)
+    df = conn.read(worksheet=nome_aba)
 
     # Tratar a coluna 'valor'
     df['valor'] = df['valor'].replace({',': '.'}, regex=True).astype(float)
@@ -109,5 +109,3 @@ def soma_valores_por_classificacao(df):
     df_grouped = df.groupby('classificacao')['valor'].sum()
 
     return df_grouped
-
-print(carregar_tratar_dados("gastomika"))
